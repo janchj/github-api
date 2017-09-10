@@ -50,7 +50,7 @@ npm test
 To access the documentation, start your application and then navigate to yourUrl/docs.
 For example: http://localhost:3001/docs
 
-## Examples:
+## Examples
 `/repositories/:handle`
 Returns lists of repositories from provided user handle.
 If no sorting is provided, default is size.
