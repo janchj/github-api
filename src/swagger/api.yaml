@@ -1,0 +1,188 @@
+swagger: "2.0"
+info:
+  version: 1.0.0
+  title: GitHub API
+  description: API exposing a method to retrieve user repositories from GitHub
+
+consumes:
+  - application/json
+produces:
+  - application/json
+
+#definitions
+definitions:
+  owner:
+    properties:
+      login:
+        type: string
+        description: user login
+      id:
+        type: string
+        description: user unique identifier
+      avatar_url:
+        type: string
+        description: url for avatar
+      gravatar_id:
+        type: string
+        description: gravatar identifier
+      url:
+        type: string
+        description: api url for user
+      html_url:
+        type: string
+        description: url for user
+
+  repo:
+    properties:
+      id:
+        type: integer
+        description: repository unique identifier
+      name:
+        type: string
+        description: repository name
+      full_name:
+        type: string
+        description: repository full name
+      owner:
+        $ref: "#/definitions/owner"
+      private:
+        type: string
+        description: if repository is only accessible by the user
+      html_url:
+        type: string
+        description: url for repository
+      description:
+        type: string
+        description: brief summary of repository
+      fork: 
+        type: string
+        description: if repository has been forked
+      url:
+        type: string
+        description: api url for repository
+      created_at:
+        type: string
+        format: date-time
+        description: date created
+      updated_at:
+        type: string
+        format: date-time
+        description: date updated
+      pushed_at:
+        type: string
+        format: date-time
+        description: date pushed    
+      git_url:  
+        type: string
+        description: git url for repository
+      ssh_url:  
+        type: string
+        description: ssh url for repository
+      clone_url:  
+        type: string
+        description: url to clone repository
+      svn_url:  
+        type: string
+        description: svn url for repository
+      homepage:  
+        type: string
+        description: homepage url for repository
+      size:  
+        type: string
+        description: repository size
+      stargazers_count:  
+        type: string
+        description: stargazers count
+      watchers_count:  
+        type: string
+        description: watchers count
+      language:  
+        type: string
+        description: repository language
+      has_issues:  
+        type: string
+        description: if repository has issues
+      has_projects:  
+        type: string
+        description: if repository has projects
+      has_downloads:  
+        type: string
+        description: if repository has downloads
+      has_wiki:
+        type: string
+        description: if repository has wiki
+      has_pages:  
+        type: string
+        description: if repository has pages
+      forks_count:  
+        type: string
+        description: fork count
+      mirror_url:  
+        type: string
+        description: mirror url
+      open_issues_count:
+        type: string
+        description: open issues count
+      forks:  
+        type: string
+        description: forks
+      open_issues:  
+        type: string
+        description: open issues
+      watchers:  
+        type: string
+        description: watchers count
+      default_branch:
+        type: string
+        description: repository default branch
+      score:
+        type: string
+        description: repository score
+
+  repositories:
+    properties:
+      count:
+        type: integer
+        description: number of results
+      data:
+        type: array
+        description: repositories
+        items:
+          $ref: "#/definitions/repo"
+# paths
+paths:
+  /repositories/{handle}:
+    get:
+      description: Returns all repositories linked to a user handle, optionally filtered by one or more criteria
+      x-swagger-router-controller: repositories-ctrl
+      operationId: getRepositoriesByHandle
+      parameters:
+        - name: handle
+          in: path
+          description: github handle for the user
+          required: true
+          type: string
+          pattern: "^[a-z0-9_-]{3,15}$"
+        - name: sortBy
+          in: query
+          description: Sort repositories by field
+          required: false
+          type: string
+          default: size
+          enum: [size, name]
+        - name: count
+          in: query
+          description: Quantity of repositories
+          required: false
+          type: integer
+          default: 5
+          minLength: 1
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: "#/definitions/repositories"
+        '400':
+          description: Bad request
+        '404':
+          description: A user with the specified handle was not found

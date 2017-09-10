@@ -1,0 +1,49 @@
+{
+  "name": "github-api",
+  "version": "1.0.0",
+  "description": "API to retrieve data from Github API",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "start:dev": "node src/app.js",
+    "test": "node node_modules/.bin/mocha src/test/**",
+    "lint": "node node_modules/.bin/eslint . --fix"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/janchj/github-api.git"
+  },
+  "author": "Jan Hernandez",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/janchj/github-api/issues"
+  },
+  "homepage": "https://github.com/janchj/github-api#readme",
+  "dependencies": {
+    "body-parser": "^1.17.2",
+    "chalk": "^2.1.0",
+    "compression": "^1.7.0",
+    "connect": "^3.6.3",
+    "dotenv": "^4.0.0",
+    "express": "^4.15.4",
+    "express-status-monitor": "^1.0.0",
+    "express-winston": "^2.4.0",
+    "helmet": "^3.8.1",
+    "js-yaml": "^3.9.1",
+    "request": "^2.81.0",
+    "request-promise": "^4.2.1",
+    "swagger-tools": "^0.10.1",
+    "winston": "^2.3.1"
+  },
+  "devDependencies": {
+    "chai": "https://registry.npmjs.org/chai/-/chai-3.5.0.tgz",
+    "chai-sorted": "^0.1.0",
+    "eslint": "^4.6.1",
+    "eslint-config-airbnb-base": "^12.0.0",
+    "eslint-plugin-import": "^2.7.0",
+    "mocha": "^3.5.1",
+    "nock": "^9.0.14",
+    "should": "^13.0.1",
+    "supertest": "^3.0.0"
+  }
+}
