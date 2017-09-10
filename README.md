@@ -19,6 +19,10 @@ Some of the libraries used to put together the application:
 - Mocha + nock + chai + should + supertests to handle tests.
 
 ## Installation
+To run the application, please install the following dependencies:
+- nodejs
+- docker
+
 ```bash
 $ npm install
 ```
@@ -50,10 +54,44 @@ For example: http://localhost:3001/docs
 `/repositories/:handle`
 Returns lists of repositories from provided user handle.
 If no sorting is provided, default is size.
+If no sorting orientation, default is descending.
 If no count is provided, default is all.
 
 `/repositories/:handle?sortBy=size`
 Returns lists of repositories from provided user handle sorted by size.
 
+`/repositories/:handle?sortBy=size&sortOrientation=asc`
+Returns lists of repositories from provided user handle sorted by size ascending.
+
 `/repositories/:handle?count=1`
 Returns a single repository from provided user handle.
+
+## Deployment
+Deployment is done using docker and hosted on heroku.
+
+docker-commands:
+`docker build -t github-api .`
+Builds the container
+
+`docker run --name github-api -p 3001:3001 -d github-api`
+Runs the container exposing the 3001 port
+
+`docker logs github-api`
+View the container logs
+
+heroku-commands:
+`heroku create`
+Creates a new heroku application.
+
+`heroku create github-api --region eu`
+Creates a new heroku application with provided name and within the EU region.
+
+`heroku container:push web`
+Pushes the docker container to heroku.
+
+`heroku open`
+Opens the application
+
+Some helpful documentation:
+https://devcenter.heroku.com/articles/container-registry-and-runtime#pushing-an-image-s
+https://blog.risingstack.com/node-hero-deploy-node-js-heroku-docker/
