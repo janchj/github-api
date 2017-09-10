@@ -70,6 +70,7 @@ Returns a single repository from provided user handle.
 Deployment is done using docker and hosted on heroku.
 
 docker-commands:
+
 `docker build -t github-api .`
 Builds the container
 
@@ -80,6 +81,7 @@ Runs the container exposing the 3001 port
 View the container logs
 
 heroku-commands:
+
 `heroku create`
 Creates a new heroku application.
 
@@ -94,4 +96,5 @@ Opens the application
 
 Some helpful documentation:
 https://devcenter.heroku.com/articles/container-registry-and-runtime#pushing-an-image-s
+
 https://blog.risingstack.com/node-hero-deploy-node-js-heroku-docker/
