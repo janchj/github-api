@@ -6,6 +6,7 @@ const getRepositoriesByHandle = (req, res, next) => {
   const handle = req.swagger.params.handle.value;
   const count = req.swagger.params.count.value;
   const sortBy = req.swagger.params.sortBy.value;
+  const sortOrientation = req.swagger.params.sortOrientation.value;
 
   // get repositories by user handle
   services.github.fetchRepositories(handle)
@@ -16,9 +17,13 @@ const getRepositoriesByHandle = (req, res, next) => {
       };
       if (repos.length > 0) {
         // sort repos by provided key
-        const sortedRepos = shared.utils.sortArrayByKeyDesc(repos, sortBy);
+        const sortedRepos = (sortOrientation === 'asc')
+          ? shared.utils.sortArrayByKeyAsc(repos, sortBy)
+          : shared.utils.sortArrayByKeyDesc(repos, sortBy);
+
         // take the requested # of results
         const filteredRepos = shared.utils.sliceArrayByCount(sortedRepos, count);
+
         // set repositories response
         repoResponse = {
           count: filteredRepos.length,
