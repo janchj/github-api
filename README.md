@@ -19,13 +19,10 @@ Some of the libraries used to put together the application:
 - Mocha + nock + chai + should + supertests to handle tests.
 
 ## Installation
-To run the application, please install the following dependencies:
-- nodejs
-- docker
-
 ```bash
 $ npm install
 ```
+Create a .env file with your local configuration (see next)
 
 ## Environment Variables
 ```bash
