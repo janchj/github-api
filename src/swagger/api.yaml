@@ -9,6 +9,10 @@ consumes:
 produces:
   - application/json
 
+tags: [
+  { "name" : "repositories", "description" : "Everything about repositories" }
+]
+
 #definitions
 definitions:
   owner:
@@ -153,6 +157,8 @@ definitions:
 paths:
   /repositories/{handle}:
     get:
+      tags:
+        - repositories
       description: Returns all repositories linked to a user handle, optionally filtered by one or more criteria
       x-swagger-router-controller: repositories-ctrl
       operationId: getRepositoriesByHandle
