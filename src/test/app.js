@@ -42,7 +42,6 @@ describe('GET /repositories/{handle}', () => {
       .reply(200, validMock);
   });
 
-
   it('with valid user handle should return 200 (OK)', (done) => {
     request(app)
       .get('/repositories/valid')
@@ -95,7 +94,7 @@ describe('GET /repositories/{handle}', () => {
       });
   });
 
-  it('with count=1, should return only one record', (done) => {
+  it('with count=1, should return only one repo', (done) => {
     request(app)
       .get('/repositories/valid?count=1')
       .expect(200)
@@ -108,7 +107,7 @@ describe('GET /repositories/{handle}', () => {
       });
   });
 
-  it('with sortBy=size, should return list sorted by size', (done) => {
+  it('with sortBy=size, should return repos sorted by size', (done) => {
     request(app)
       .get('/repositories/valid?sortBy=size')
       .expect(200)
@@ -120,7 +119,7 @@ describe('GET /repositories/{handle}', () => {
       });
   });
 
-  it('with sortBy=name, should return list sorted by name', (done) => {
+  it('with sortBy=name, should return repos sorted by name', (done) => {
     request(app)
       .get('/repositories/valid?sortBy=name')
       .expect(200)
@@ -128,6 +127,18 @@ describe('GET /repositories/{handle}', () => {
         res.body.should.have.property('count');
         res.body.should.have.property('data');
         expect(res.body.data).to.be.descendingBy('name');
+        done();
+      });
+  });
+
+  it('with [sortBy=name, sortOrientation=desc], should return repos sorted by name asc', (done) => {
+    request(app)
+      .get('/repositories/valid?sortBy=name&sortOrientation=asc')
+      .expect(200)
+      .end((err, res) => {
+        res.body.should.have.property('count');
+        res.body.should.have.property('data');
+        expect(res.body.data).to.be.ascendingBy('name');
         done();
       });
   });

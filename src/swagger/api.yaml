@@ -168,17 +168,23 @@ paths:
           description: github handle for the user
           required: true
           type: string
-          pattern: "^[a-z0-9_-]{3,15}$"
         - name: sortBy
           in: query
-          description: Sort repositories by field
+          description: sort repositories by field
           required: false
           type: string
           default: size
           enum: [size, name]
+        - name: sortOrientation
+          in: query
+          description: sort orientation
+          required: false
+          type: string
+          default: desc
+          enum: [desc, asc]
         - name: count
           in: query
-          description: Quantity of repositories
+          description: quantity of repositories
           required: false
           type: integer
           default: 5
