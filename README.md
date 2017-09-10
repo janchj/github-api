@@ -33,7 +33,8 @@ GITHUB_USER_AGENT=github-api // user-agent for github API
 
 ## Ready?
 ```bash
-npm start
+npm start (production)
+npm run start:dev (development)
 ```
 
 To run tests
